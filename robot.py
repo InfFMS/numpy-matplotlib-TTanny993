@@ -6,3 +6,40 @@
 # Построить путь робота на графике (соединяя все пройденные точки).
 # Подсчитать, сколько шагов робот сделал в каждую сторону.
 # Определить расстояние от начальной точки до конечной.
+import random
+import matplotlib.pyplot as plt
+
+x, y = 0, 0
+steps = {"вверх": 0,"вниз": 0,"вправо": 0,"влево": 0}
+num_steps = 100
+path_x = [x]
+path_y = [y]
+
+for i in range(num_steps):
+    move = random.choice(["вверх", "вниз", "вправо", "влево"])
+    if move == "вверх":
+        y += 1
+        steps["вверх"] += 1
+    elif move == "вниз":
+        y -= 1
+        steps["вниз"] += 1
+    elif move == "вправо":
+        x += 1
+        steps["вправо"] += 1
+    elif move == "влево":
+        x -= 1
+        steps["влево"] += 1
+    path_x.append(x)
+    path_y.append(y)
+final_position = (x, y)
+distance = ((x ** 2 + y ** 2) ** 0.5)
+print(f"Конечная позиция: {final_position}")
+print(f"Количество шагов в каждую сторону: {steps}")
+print(f"Расстояние от начальной точки: {distance:.2f}")
+
+plt.plot(path_x, path_y, marker='o')
+plt.title('Маршрут робота')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.grid()
+plt.show()
